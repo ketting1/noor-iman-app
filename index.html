@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Noor & Iman – Learn Arabic with Joy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sky background (same as before) -->
+  <div class="sky">
+    <div class="cloud cloud1">☁️</div>
+    <div class="cloud cloud2">☁️</div>
+    <div class="moon">🌙</div>
+    <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+  </div>
 
+  <div class="container">
+    <header>
+      <h1>📖 Noor & Iman</h1>
+      <p>Learn • Play • Grow</p>
+      <h2>Arabic & Islamic Learning for Children</h2>
+      <button class="btn btn-start" onclick="startLesson()">🚀 Start Learning</button>
+      <br>
+      <button id="homeVoiceBtn" class="btn btn-voice">🔊 Enable Voice</button>
+      <div id="homeStatus" class="status">⏳ Tap "Enable Voice" to activate sound</div>
+    </header>
+
+    <section class="languages">
+      <button onclick="alert('🌍 English')">🇬🇧 English</button>
+      <button onclick="alert('🌍 Wolof coming soon')">🇸🇳 Wolof</button>
+      <button onclick="alert('🌍 Français')">🇫🇷 Français</button>
+      <button onclick="alert('🌍 العربية')">🇸🇦 العربية</button>
+    </section>
+
+    <section class="menu">
+      <div class="card" onclick="startLesson()"><span class="icon">📖</span>Arabic Alphabet</div>
+      <div class="card" onclick="alert('🔢 Numbers coming soon!')"><span class="icon">🔢</span>Numbers</div>
+      <div class="card" onclick="alert('🎨 Colours coming soon!')"><span class="icon">🎨</span>Colours</div>
+      <div class="card" onclick="alert('🐪 Animals coming soon!')"><span class="icon">🐪</span>Animals</div>
+      <div class="card" onclick="alert('🍎 Fruits coming soon!')"><span class="icon">🍎</span>Fruits</div>
+      <div class="card" onclick="alert('💧 Wudu coming soon!')"><span class="icon">💧</span>Wudu</div>
+      <div class="card" onclick="alert('🕌 Salah coming soon!')"><span class="icon">🕌</span>Salah</div>
+      <div class="card" onclick="alert('🤲 Duas coming soon!')"><span class="icon">🤲</span>Duas</div>
+      <div class="card" onclick="alert('⭐ Progress coming soon!')"><span class="icon">⭐</span>Progress</div>
+    </section>
+
+    <footer>Made with ❤️ for Muslim children around the world.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
