@@ -1,1 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Noor & Iman – Learn Arabic with Joy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+    body { font-family: 'Comic Neue', cursive, sans-serif; background: linear-gradient(180deg, #0a1628 0%, #1a2a4a 100%); min-height: 100vh; color: white; padding: 20px; overflow-x: hidden; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .sky { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none; }
+    .moon { position: absolute; top: 40px; right: 60px; font-size: 4rem; animation: floatMoon 6s ease-in-out infinite; }
+    @keyframes floatMoon { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .stars { position: absolute; top: 20px; left: 20px; font-size: 1.8rem; letter-spacing: 15px; animation: twinkle 3s infinite alternate; }
+    @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+    .cloud { position: absolute; font-size: 5rem; opacity: 0.12; animation: floatCloud 20s linear infinite; }
+    .cloud1 { top: 10%; left: -10%; animation-duration: 25s; }
+    .cloud2 { top: 30%; left: -20%; animation-duration: 30s; animation-delay: 5s; }
+    @keyframes floatCloud { 0% { transform: translateX(-20vw); } 100% { transform: translateX(120vw); } }
+    header { text-align: center; padding: 30px 20px 20px; background: rgba(255,255,255,0.06); border-radius: 60px; backdrop-filter: blur(8px); margin-bottom: 25px; border: 2px solid rgba(255,215,0,0.15); }
+    h1 { font-size: 2.8rem; background: linear-gradient(135deg, #ffd700, #ffb347); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Amiri', serif; }
+    header p { color: #ffd966; font-size: 1.2rem; margin: 5px 0; }
+    header h2 { font-size: 1.4rem; color: #ffe0b3; font-weight: normal; }
+    .btn { border: none; font-weight: bold; border-radius: 60px; cursor: pointer; font-family: 'Comic Neue', cursive; padding: 12px 24px; font-size: 1rem; transition: 0.08s linear; display: inline-block; }
+    .btn:active { transform: scale(0.96); }
+    .btn-start { background: linear-gradient(135deg, #ffaa33, #f57c00); color: white; box-shadow: 0 6px 0 #bf360c; font-size: 1.3rem; padding: 16px 40px; margin: 15px 0; }
+    .btn-start:active { transform: translateY(4px); box-shadow: 0 2px 0 #bf360c; }
+    .btn-voice { background: #66bb6a; color: white; box-shadow: 0 4px 0 #2e7d32; }
+    .btn-voice:active { transform: translateY(3px); }
+    .btn-home { background: #78909c; color: white; box-shadow: 0 4px 0 #37474f; }
+    .status { background: rgba(255,255,255,0.05); padding: 8px 18px; border-radius: 40px; font-size: 0.9rem; display: inline-block; margin: 10px 0; }
+    .status.ready { background: rgba(46,125,50,0.3); border: 1px solid #66bb6a; color: #a5d6a7; }
+    .status.error { background: rgba(198,40,40,0.3); border: 1px solid #ef5350; color: #ef9a9a; }
+    .languages { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 15px 0 25px; }
+    .languages button { background: rgba(255,255,255,0.08); border: 2px solid rgba(255,183,61,0.4); color: #ffd966; padding: 8px 18px; border-radius: 40px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .languages button:hover { background: #ffb83d; color: #1a2a4a; }
+    .menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 180px)); gap: 18px; justify-content: center; margin: 25px 0; }
+    .card { background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); border: 2px solid rgba(255,215,0,0.15); border-radius: 40px; padding: 25px 12px 20px; text-align: center; font-size: 1.05rem; font-weight: bold; color: #ffe0b3; cursor: pointer; transition: 0.25s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .card:hover { transform: translateY(-6px) scale(1.03); background: rgba(255,215,0,0.12); border-color: #ffd700; }
+    .card .icon { font-size: 2.2rem; display: block; margin-bottom: 10px; }
+    .stars-display { font-size: 2rem; letter-spacing: 8px; margin: 8px 0; }
+    .reward-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(8px); }
+    .reward-box { background: linear-gradient(145deg, #1a2a4a, #0a1628); border: 4px solid #ffd700; border-radius: 60px; padding: 40px 50px; text-align: center; max-width: 90%; animation: rewardPop 0.6s ease; }
+    @keyframes rewardPop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
+    .reward-box .big-star { font-size: 4rem; display: block; }
+    .reward-box h2 { font-size: 2.8rem; color: #ffd700; margin: 10px 0; }
+    .reward-box p { font-size: 1.2rem; color: #ffd966; margin: 15px 0; }
+    footer { text-align: center; margin-top: 40px; padding: 20px; color: #8899aa; font-size: 0.9rem; }
+    /* LESSON PAGE STYLES */
+    .lesson-container { max-width: 800px; margin: 0 auto; }
+    .lesson-header { text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: 50px; margin-bottom: 25px; border: 2px solid rgba(255,215,0,0.1); }
+    .lesson-header h1 { font-size: 2.2rem; -webkit-text-fill-color: #ffd700; }
+    .letter-area { background: rgba(255,255,255,0.05); border-radius: 60px; padding: 30px 20px; text-align: center; margin: 20px 0; min-height: 350px; border: 2px solid rgba(255,215,0,0.08); }
+    .big-letter { font-size: 10rem; font-family: 'Amiri', serif; color: #ffd700; text-shadow: 0 0 40px rgba(255,215,0,0.2); transition: all 0.5s ease; cursor: pointer; line-height: 1.2; min-height: 180px; display: flex; align-items: center; justify-content: center; }
+    .big-letter.bounce { animation: bounceLetter 0.6s ease; }
+    .big-letter.sparkle { animation: sparkleLetter 0.8s ease; }
+    .big-letter.draw { animation: drawLetter 0.7s ease; }
+    .big-letter.colour { animation: colourLetter 0.7s ease; }
+    @keyframes bounceLetter { 0% { transform: scale(1); } 30% { transform: scale(1.3); } 50% { transform: scale(0.9); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    @keyframes sparkleLetter { 0% { text-shadow: 0 0 10px gold; } 50% { text-shadow: 0 0 60px gold, 0 0 100px #ffd700; } 100% { text-shadow: 0 0 40px rgba(255,215,0,0.2); } }
+    @keyframes drawLetter { 0% { opacity: 0; transform: scale(0.5); letter-spacing: 30px; } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); letter-spacing: 0; } }
+    @keyframes colourLetter { 0% { color: #ffd700; } 25% { color: #ff6b6b; } 50% { color: #4ecdc4; } 75% { color: #ffe66d; } 100% { color: #ffd700; } }
+    .letter-name { font-size: 1.8rem; color: #ffb83d; margin: 10px 0; min-height: 50px; }
+    .tracing-area { margin: 20px 0; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 40px; border: 2px dashed rgba(255,215,0,0.2); min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .trace-letter { font-size: 5rem; font-family: 'Amiri', serif; color: rgba(255,215,0,0.2); letter-spacing: 15px; }
+    .trace-instruction { color: #aab8c9; font-size: 0.9rem; margin-top: 8px; }
+    .letter-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 20px 0; }
+    .letter-nav button { font-family: 'Amiri', serif; font-size: 2rem; padding: 8px 18px; border-radius: 30px; border: 3px solid rgba(255,215,0,0.2); background: rgba(255,255,255,0.05); color: #ffd966; cursor: pointer; transition: 0.2s; min-width: 60px; }
+    .letter-nav button.active { border-color: #ffd700; background: rgba(255,215,0,0.15); box-shadow: 0 0 20px rgba(255,215,0,0.1); }
+    .letter-nav button.learned { border-color: #66bb6a; background: rgba(46,125,50,0.3); }
+    .btn-next { background: #ffaa33; color: white; box-shadow: 0 4px 0 #bf360c; }
+    .btn-next:active { transform: translateY(3px); }
+    .hidden { display: none; }
+    @media (max-width: 550px) { .big-letter { font-size: 7rem; min-height: 130px; } .trace-letter { font-size: 3.5rem; } .letter-nav button { font-size: 1.5rem; padding: 6px 12px; min-width: 45px; } .lesson-header h1 { font-size: 1.8rem; } h1 { font-size: 2rem; } .menu { grid-template-columns: repeat(auto-fill, minmax(120px, 140px)); } .card { padding: 18px 8px 14px; font-size: 0.9rem; } }
+  </style>
+</head>
+<body>
 
+<!-- ===== HOME PAGE ===== -->
+<div id="homePage">
+  <div class="sky">
+    <div class="cloud cloud1">☁️</div>
+    <div class="cloud cloud2">☁️</div>
+    <div class="moon">🌙</div>
+    <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>📖 Noor & Iman</h1>
+      <p>Learn • Play • Grow</p>
+      <h2>Arabic & Islamic Learning for Children</h2>
+      <button class="btn btn-start" onclick="showLesson()">🚀 Start Learning</button>
+      <br>
+      <button id="homeVoiceBtn" class="btn btn-voice">🔊 Enable Voice</button>
+      <div id="homeStatus" class="status">⏳ Tap "Enable Voice" to activate sound</div>
+    </header>
+
+    <section class="languages">
+      <button onclick="alert('🌍 English')">🇬🇧 English</button>
+      <button onclick="alert('🌍 Wolof coming soon')">🇸🇳 Wolof</button>
+      <button onclick="alert('🌍 Français')">🇫🇷 Français</button>
+      <button onclick="alert('🌍 العربية')">🇸🇦 العربية</button>
+    </section>
+
+    <section class="menu">
+      <div class="card" onclick="showLesson()"><span class="icon">📖</span>Arabic Alphabet</div>
+      <div class="card" onclick="alert('🔢 Numbers coming soon!')"><span class="icon">🔢</span>Numbers</div>
+      <div class="card" onclick="alert('🎨 Colours coming soon!')"><span class="icon">🎨</span>Colours</div>
+      <div class="card" onclick="alert('🐪 Animals coming soon!')"><span class="icon">🐪</span>Animals</div>
+      <div class="card" onclick="alert('🍎 Fruits coming soon!')"><span class="icon">🍎</span>Fruits</div>
+      <div class="card" onclick="alert('💧 Wudu coming soon!')"><span class="icon">💧</span>Wudu</div>
+      <div class="card" onclick="alert('🕌 Salah coming soon!')"><span class="icon">🕌</span>Salah</div>
+      <div class="card" onclick="alert('🤲 Duas coming soon!')"><span class="icon">🤲</span>Duas</div>
+      <div class="card" onclick="alert('⭐ Progress coming soon!')"><span class="icon">⭐</span>Progress</div>
+    </section>
+
+    <footer>Made with ❤️ for Muslim children around the world.</footer>
+  </div>
+</div>
+
+<!-- ===== LESSON PAGE ===== -->
+<div id="lessonPage" class="lesson-container hidden">
+  <div class="lesson-header">
+    <h1>📖 Lesson 1: Alif to Jeem</h1>
+    <div class="stars-display" id="starDisplay">☆☆☆☆☆</div>
+    <div style="margin:10px 0;">
+      <button id="lessonVoiceBtn" class="btn btn-voice">🔊 Enable Voice</button>
+      <button id="retryVoiceBtn" class="btn btn-voice" style="background:#ff7043; box-shadow:0 4px 0 #bf360c;">🔄 Retry Voice</button>
+      <button class="btn btn-home" onclick="showHome()">🏠 Home</button>
+    </div>
+    <div id="lessonStatus" class="status">⏳ Tap "Enable Voice" to start</div>
+  </div>
+
+  <div class="letter-area">
+    <div id="bigLetter" class="big-letter">ا</div>
+    <div id="letterName" class="letter-name">Alif</div>
+    <div class="tracing-area">
+      <span id="traceLetter" class="trace-letter">ا</span>
+      <div class="trace-instruction">👆 Trace the dotted letter with your finger</div>
+    </div>
+  </div>
+
+  <div class="letter-nav" id="letterNav"></div>
+  <div style="text-align:center; margin:15px 0;">
+    <button id="nextLessonBtn" class="btn btn-next" style="display:none;">🎉 Next Lesson →</button>
+  </div>
+
+  <div id="rewardOverlay" class="reward-overlay">
+    <div class="reward-box">
+      <span class="big-star">⭐</span>
+      <h2>Excellent! 🎉</h2>
+      <p id="rewardMessage">You learned Alif!</p>
+      <button class="btn btn-voice" onclick="closeReward()">Continue Learning</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // VOICE SYSTEM (standalone – no external files needed)
+  // ============================================================
+  let speechEnabled = false;
+  let selectedVoice = null;
+
+  function updateStatus(id, msg, type = '') {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = msg; el.className = 'status ' + type; }
+  }
+
+  function loadVoices() {
+    return new Promise((resolve) => {
+      if (!window.speechSynthesis) { resolve(false); return; }
+      let attempts = 0;
+      const check = () => {
+        const voices = speechSynthesis.getVoices();
+        attempts++;
+        if (voices && voices.length > 0) {
+          const arabic = voices.find(v => v.lang === 'ar-SA' || v.lang === 'ar-EG' || v.lang.startsWith('ar'));
+          selectedVoice = arabic || voices[0];
+          resolve(true);
+          return;
+        }
+        if (attempts < 20) setTimeout(check, 200);
+        else resolve(false);
+      };
+      check();
+      speechSynthesis.addEventListener('voiceschanged', () => {
+        if (!selectedVoice) {
+          const voices = speechSynthesis.getVoices();
+          if (voices.length) {
+            selectedVoice = voices.find(v => v.lang.startsWith('ar')) || voices[0];
+            resolve(true);
+          }
+        }
+      }, { once: true });
+    });
+  }
+
+  function playLetterSound(letterData, statusId) {
+    const audio = new Audio(letterData.mp3);
+    audio.play().catch(function() {
+      if (!speechEnabled) {
+        if (statusId) updateStatus(statusId, '⚠️ Enable voice first!', 'error');
+        return;
+      }
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(letterData.sound);
+      utterance.lang = 'ar';
+      utterance.rate = 0.85;
+      if (selectedVoice) utterance.voice = selectedVoice;
+      setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+        if (statusId) updateStatus(statusId, `🔊 ${letterData.name} (TTS)`, 'ready');
+      }, 50);
+    });
+  }
+
+  async function enableVoiceGlobal(statusId) {
+    if (!statusId) statusId = 'homeStatus';
+    updateStatus(statusId, '🔄 Loading voice...', '');
+    const success = await loadVoices();
+    if (success) {
+      speechEnabled = true;
+      updateStatus(statusId, '✅ Voice active! MP3 or TTS will play.', 'ready');
+      if (window.speechSynthesis) {
+        const u = new SpeechSynthesisUtterance('أَلِف  باء  تاء');
+        u.lang = 'ar';
+        u.rate = 0.85;
+        if (selectedVoice) u.voice = selectedVoice;
+        setTimeout(() => window.speechSynthesis.speak(u), 100);
+      }
+    } else {
+      updateStatus(statusId, '❌ Voice failed. Tap again or install Google TTS.', 'error');
+    }
+  }
+
+  // ============================================================
+  // NAVIGATION (no external files needed)
+  // ============================================================
+  function showLesson() {
+    document.getElementById('homePage').classList.add('hidden');
+    document.getElementById('lessonPage').classList.remove('hidden');
+    renderNav();
+    renderCurrentLetter();
+    updateStars();
+    // Copy voice status
+    if (speechEnabled) {
+      updateStatus('lessonStatus', '✅ Voice active! Tap any letter.', 'ready');
+    } else {
+      updateStatus('lessonStatus', '⏳ Tap "Enable Voice" to start.', '');
+    }
+  }
+
+  function showHome() {
+    document.getElementById('lessonPage').classList.add('hidden');
+    document.getElementById('homePage').classList.remove('hidden');
+  }
+
+  function closeReward() {
+    document.getElementById('rewardOverlay').style.display = 'none';
+  }
+
+  // ============================================================
+  // LESSON DATA (uses your Sounds/ folder)
+  // ============================================================
+  const lessonLetters = [
+    { char: "ا", name: "Alif", sound: "أَلِف", mp3: "Sounds/alif.mp3" },
+    { char: "ب", name: "Baa", sound: "باء", mp3: "Sounds/baa.mp3" },
+    { char: "ت", name: "Taa", sound: "تاء", mp3: "Sounds/ta.mp3" },
+    { char: "ث", name: "Thaa", sound: "ثاء", mp3: "Sounds/tha.mp3" },
+    { char: "ج", name: "Jeem", sound: "جيم", mp3: "Sounds/jijim.mp3" }
+  ];
+
+  let currentIndex = 0;
+  let learnedLetters = {};
+  let starsEarned = 0;
+
+  function renderNav() {
+    const container = document.getElementById('letterNav');
+    container.innerHTML = '';
+    lessonLetters.forEach((letter, idx) => {
+      const btn = document.createElement('button');
+      btn.textContent = letter.char;
+      btn.dataset.index = idx;
+      if (idx === currentIndex) btn.classList.add('active');
+      if (learnedLetters[letter.char]) btn.classList.add('learned');
+      btn.addEventListener('click', () => { currentIndex = idx; renderCurrentLetter(); });
+      container.appendChild(btn);
+    });
+  }
+
+  function renderCurrentLetter() {
+    const letter = lessonLetters[currentIndex];
+    const big = document.getElementById('bigLetter');
+    const name = document.getElementById('letterName');
+    const trace = document.getElementById('traceLetter');
+
+    big.textContent = letter.char;
+    big.className = 'big-letter draw';
+    setTimeout(() => {
+      big.className = 'big-letter bounce';
+      setTimeout(() => {
+        big.className = 'big-letter sparkle';
+        setTimeout(() => {
+          big.className = 'big-letter colour';
+          setTimeout(() => { big.className = 'big-letter'; }, 700);
+        }, 600);
+      }, 500);
+    }, 700);
+
+    name.textContent = letter.name;
+    trace.textContent = letter.char;
+    playLetterSound(letter, 'lessonStatus');
+
+    if (!learnedLetters[letter.char]) {
+      learnedLetters[letter.char] = true;
+      starsEarned++;
+      updateStars();
+      renderNav();
+      if (starsEarned === 5) {
+        setTimeout(showRewardAll, 800);
+      } else {
+        setTimeout(showRewardSingle, 600);
+      }
+    }
+    renderNav();
+  }
+
+  function updateStars() {
+    document.getElementById('starDisplay').textContent = '⭐'.repeat(starsEarned) + '☆'.repeat(5 - starsEarned);
+  }
+
+  function showRewardSingle() {
+    const overlay = document.getElementById('rewardOverlay');
+    document.getElementById('rewardMessage').textContent = `🌟 You learned ${lessonLetters[currentIndex].name}! Keep going! 🌟`;
+    overlay.style.display = 'flex';
+  }
+
+  function showRewardAll() {
+    document.getElementById('rewardMessage').textContent = '🎉 EXCELLENT! You learned all 5 letters! 🎉';
+    document.getElementById('rewardOverlay').style.display = 'flex';
+    document.getElementById('nextLessonBtn').style.display = 'inline-block';
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', function() {
+    // Home voice
+    document.getElementById('homeVoiceBtn').addEventListener('click', function() {
+      enableVoiceGlobal('homeStatus');
+    });
+    // Lesson voice
+    document.getElementById('lessonVoiceBtn').addEventListener('click', function() {
+      enableVoiceGlobal('lessonStatus');
+    });
+    document.getElementById('retryVoiceBtn').addEventListener('click', function() {
+      enableVoiceGlobal('lessonStatus');
+    });
+    // Next lesson
+    document.getElementById('nextLessonBtn').addEventListener('click', function() {
+      alert('🚀 Lesson 2 coming soon! (Haa, Khaa, Daal, Thaal, Raa)');
+    });
+    // Pre-load voices
+    loadVoices().then(success => {
+      if (success && !speechEnabled) {
+        updateStatus('homeStatus', '✅ Voice pre-loaded! Tap "Enable Voice".', 'ready');
+      }
+    });
+  });
+</script>
+</body>
+</html>
