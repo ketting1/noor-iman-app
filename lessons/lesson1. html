@@ -192,15 +192,18 @@
 <script src="../script.js"></script>
 <script>
   // ============================================================
-  // LESSON DATA – uses your MP3 files from ../Sounds/
+  // LESSON DATA – uses your MP3 files from ../sounds/
   // ============================================================
   const lessonLetters = [
-    { char: "ا", name: "Alif", sound: "أَلِف", mp3: "../Sounds/alif.mp3" },
-    { char: "ب", name: "Baa", sound: "باء", mp3: "../Sounds/baa.mp3" },
-    { char: "ت", name: "Taa", sound: "تاء", mp3: "../Sounds/ta.mp3" },
-    { char: "ث", name: "Thaa", sound: "ثاء", mp3: "../Sounds/tha.mp3" },
-    { char: "ج", name: "Jeem", sound: "جيم", mp3: "../Sounds/jijim.mp3" }
+    { char: "ا", name: "Alif", sound: "أَلِف", mp3: "../sounds/alif.mp3" },
+    { char: "ب", name: "Baa", sound: "باء", mp3: "../sounds/baa.mp3" },
+    { char: "ت", name: "Taa", sound: "تاء", mp3: "../sounds/ta.mp3" },
+    { char: "ث", name: "Thaa", sound: "ثاء", mp3: "../sounds/tha.mp3" },
+    { char: "ج", name: "Jeem", sound: "جيم", mp3: "../sounds/jijim.mp3" }
   ];
+const lessonLetters = [
+  { char: "ا", name: "Alif", sound: "أَلِف", mp3: "..." }
+];
 
   // ============================================================
   // STATE
