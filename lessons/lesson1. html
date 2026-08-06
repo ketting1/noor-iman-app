@@ -151,7 +151,7 @@
 
   <!-- Header -->
   <div class="lesson-header">
-    <h1>📖 Lesson 1: Alif to Jeem</h1>
+    <h1>📖 Lesson 1: alif to Jeem</h1>
     <div class="stars-display" id="starDisplay">☆☆☆☆☆</div>
     <div style="margin:10px 0;">
       <button id="lessonVoiceBtn" class="btn btn-voice">🔊 Enable Voice</button>
@@ -163,7 +163,7 @@
   <!-- Main Letter Display -->
   <div class="letter-area">
     <div id="bigLetter" class="big-letter">ا</div>
-    <div id="letterName" class="letter-name">Alif</div>
+    <div id="letterName" class="letter-name">alif</div>
     <div class="tracing-area">
       <span id="traceLetter" class="trace-letter">ا</span>
       <div class="trace-instruction">👆 Trace the dotted letter with your finger</div>
@@ -183,7 +183,7 @@
     <div class="reward-box">
       <span class="big-star">⭐</span>
       <h2>Excellent! 🎉</h2>
-      <p id="rewardMessage">You learned Alif!</p>
+      <p id="rewardMessage">You learned alif!</p>
       <button class="btn btn-voice" onclick="closeReward()">Continue Learning</button>
     </div>
   </div>
@@ -195,14 +195,14 @@
   // LESSON DATA – uses your MP3 files from ../sounds/
   // ============================================================
   const lessonLetters = [
-    { char: "ا", name: "Alif", sound: "أَلِف", mp3: "../sounds/alif.mp3" },
-    { char: "ب", name: "Baa", sound: "باء", mp3: "../sounds/baa.mp3" },
-    { char: "ت", name: "Taa", sound: "تاء", mp3: "../sounds/ta.mp3" },
-    { char: "ث", name: "Thaa", sound: "ثاء", mp3: "../sounds/tha.mp3" },
-    { char: "ج", name: "Jeem", sound: "جيم", mp3: "../sounds/jijim.mp3" }
+    { char: "ا", name: "alif", sound: "أَلِف", mp3: "../sounds/alif.mp3" },
+    { char: "ب", name: "baa", sound: "باء", mp3: "../sounds/baa.mp3" },
+    { char: "ت", name: "taa", sound: "تاء", mp3: "../sounds/ta.mp3" },
+    { char: "ث", name: "thaa", sound: "ثاء", mp3: "../sounds/tha.mp3" },
+    { char: "ج", name: "jeem", sound: "جيم", mp3: "../sounds/jijim.mp3" }
   ];
 const lessonLetters = [
-  { char: "ا", name: "Alif", sound: "أَلِف", mp3: "..." }
+  { char: "ا", name: "alif", sound: "أَلِف", mp3: "..." }
 ];
 
   // ============================================================
@@ -258,7 +258,7 @@ const lessonLetters = [
     trace.textContent = letter.char;  // trace shows the same letter (dotted effect via CSS)
 
     // Play the sound (MP3 or TTS fallback)
-    playLetterSound(letter, 'lessonStatus');
+    playLettersound(letter, 'lessonStatus');
 
     // Mark as learned if first time
     if (!learnedLetters[letter.char]) {
@@ -306,7 +306,7 @@ const lessonLetters = [
   // NEXT LESSON (placeholder)
   // ============================================================
   document.getElementById('nextLessonBtn').addEventListener('click', () => {
-    alert('🚀 Lesson 2 coming soon! (Haa, Khaa, Daal, Thaal, Raa)');
+    alert('🚀 Lesson 2 coming soon! (haa, khaa, daal, thaal, raa)');
   });
 
   // ============================================================
