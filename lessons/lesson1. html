@@ -199,11 +199,9 @@
     { char: "ب", name: "baa", sound: "باء", mp3: "../sounds/baa.mp3" },
     { char: "ت", name: "taa", sound: "تاء", mp3: "../sounds/ta.mp3" },
     { char: "ث", name: "thaa", sound: "ثاء", mp3: "../sounds/tha.mp3" },
-    { char: "ج", name: "jeem", sound: "جيم", mp3: "../sounds/jijim.mp3" }
+    { char: "ج", name: "jeem", sound: "جيم", mp3: "../sounds/jiim.mp3" }
   ];
-const lessonLetters = [
-  { char: "ا", name: "alif", sound: "أَلِف", mp3: "..." }
-];
+
 
   // ============================================================
   // STATE
@@ -257,8 +255,8 @@ const lessonLetters = [
     name.textContent = letter.name;
     trace.textContent = letter.char;  // trace shows the same letter (dotted effect via CSS)
 
-    // Play the sound (MP3 or TTS fallback)
-    playLettersound(letter, 'lessonStatus');
+    // PLay the Sound (MP3 or TTS fallback)
+    playLetterSound(letter, 'lessonStatus');
 
     // Mark as learned if first time
     if (!learnedLetters[letter.char]) {
