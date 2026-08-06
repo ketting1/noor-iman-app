@@ -48,6 +48,7 @@ function loadVoices() {
         resolve(true);
         return;
       }
+      function playLetterSound(letterData, statusElementId) {
 
       if (attempts < maxAttempts) {
         setTimeout(check, 200);
